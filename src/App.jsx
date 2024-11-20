@@ -40,8 +40,8 @@ function App() {
    useEffect(fetchData, [])
     
    function handlerDeleteTask(e) {
-    const dataIndex = Number(e.target.getAttribute('dataIndex'))
-    const newTask = task.data.filter((task, index) => dataIndex != index ) 
+    const dataIndex = Number(e.target.getAttribute('dataindex'))
+    const newTask = task.filter(oost => dataIndex !== index ) 
 
     setTask(newTask)
    }
