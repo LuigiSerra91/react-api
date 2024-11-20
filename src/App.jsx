@@ -11,31 +11,37 @@ BONUS
 Implementare la funzionalità di modifica del titolo di un post.
 Aggiungere più campi al form (ad es. lo stato di un articolo - draft, published - o l’autore)
 Buon divertimento e confermate lettura come al solito
-
-
-
 */
 
 const initialFormdata = {
-  name: '',
-    image: '',
+    title: '',
+    img: '',
     description: '',
     category: '', 
-    tags: [],
-  available: false
+   
 }
-
+const api_server = "http://localhost:3002"
 
 function App() {
-  const [task, setTask] = useState(data)
-    
-    const[formData, setFormData] = useState(initialFormdata)
+  const [task, setTask] = useState({})
+  const[formData, setFormData] = useState(initialFormdata)
    
+   function fetchData(url = "http://localhost:3002/post"){
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setTask(data)
 
+      
+    })
+   }
+
+   useEffect(fetchData, [])
     
    function handlerDeleteTask(e) {
     const dataIndex = Number(e.target.getAttribute('dataIndex'))
-    const newTask = task.filter((task, index) => dataIndex != index ) 
+    const newTask = task.data.filter((task, index) => dataIndex != index ) 
 
     setTask(newTask)
    }
@@ -63,7 +69,7 @@ function App() {
 
     setTask([
       newItem,
-      ...task
+      ...task.data
     ])
 
     setFormData(initialFormdata)
@@ -96,29 +102,29 @@ function App() {
 
         <form onSubmit={handleFormSubmit}>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">name</label>
+            <label htmlFor="title" className="form-label">name</label>
             <input type="text" 
             className="form-controll" 
-            id="name"
-            name="name"
-            aria-describedby="namehelper"
+            id="title"
+            name="title"
+            aria-describedby="titlehelper"
             placeholder="ugo"
             required
-            value={formData.name}
+            value={formData.title}
             onChange={handleFormField}
             />
           </div>
             
           <div className="mb-3">
-            <label htmlFor="image" className="form-label">image</label>
+            <label htmlFor="img" className="form-label">image</label>
             <input type="text" 
             className="form-controll" 
-            id="image"
-            name="image"
+            id="img"
+            name="img"
             aria-describedby="imagehelper"
-            placeholder="add image"
+            placeholder="add img"
             required
-            value={formData.image}
+            value={formData.img}
             onChange={handleFormField}
             />
           </div>
@@ -212,39 +218,38 @@ function App() {
           
 
       <div className="container bg-warning p-1">
-                <h1>Lista dei post</h1>
+
+        <div className="row justify-content-center">
+          <div className="col-sm-12 col-md-6 col-lg-4 g-3">
+          {task.data ? task.data.map((character, index) => (
+
+           <div className="card" key={character.id}>
+  
+           <img src={api_server + character.img} alt="" />
+           <div className="card-body">
+           <p>{character.title}</p>
+           <p>{character.author}</p>
+  
+          <p>{character.description}</p>
+          <button onClick={handlerDeleteTask} dataIndex={index}> press</button>
+      </div>
+   
+ 
+  
+</div>
+)) : <p>no result</p>}
+
+          </div>
+    
+        </div>
+                
 
              
 
+      
+                
+                
               
-
-                
-                
-                <ul>
-                            {task.map((post, index) => <li key={index}>
-                                <div className="container">
-                                    <p>
-                                        {post.name}
-                                    </p>
-                                    <img src={post.image} alt={post.name} />
-                                    <p>
-                                        {post.description}
-                                    </p>
-                                    <p>
-                                        {post.category}
-                                    </p>
-                                    <p>
-                                        {post.tags}
-                                    </p>
-                                    <p>
-                                        {post.available ? 'post available' : 'post not available'}
-                                    </p>
-                                </div>
-                                <button onClick={handlerDeleteTask} dataIndex={index}>
-                                    press
-                                </button>
-                            </li>)}
-                        </ul>
 
             </div>
 
