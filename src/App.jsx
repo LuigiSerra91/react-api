@@ -40,8 +40,8 @@ function App() {
    useEffect(fetchData, [])
     
    function handlerDeleteTask(e) {
-    const dataIndex = Number(e.target.getAttribute('dataindex'))
-    const newTask = task.filter(oost => dataIndex !== index ) 
+    const taskTrashIndex = Number(e.target.getAttribute('data-index'))
+    const newTask = task.data.filter((task, index) => index !== taskTrashIndex ) 
 
     setTask(newTask)
    }
@@ -231,7 +231,7 @@ function App() {
            <p>{character.author}</p>
   
           <p>{character.description}</p>
-          <button onClick={handlerDeleteTask} dataIndex={index}> press</button>
+          <button onClick={handlerDeleteTask} taskTrashIndex={index}> press</button>
       </div>
    
  
