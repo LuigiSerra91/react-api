@@ -7,4 +7,10 @@ img{
         width: 150px;
     }
     background-color: bisque;
+    p{
+        font-family: fantasy;
+        color: tomato;
+    }
 }
+
+

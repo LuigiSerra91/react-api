@@ -40,25 +40,34 @@ function App() {
   useEffect(fetchData, [])
 
   function handlerDeleteTask(e) {
-    const taskTrashIndex = Number(e.target.getAttribute('data-index'))
-    const newTask = task.data.filter((task, index) => index !== taskTrashIndex)
 
-    setTask(newTask)
+
+    fetch('http://localhost:3002/post/${id}', {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+
+      })
+    //const taskTrashIndex = Number(e.target.getAttribute('data-index'))
+    // const newTask = task.data.filter((task, index) => index !== taskTrashIndex)
+
+    //setTask(newTask)
   }
 
 
-  
+
   function handleFormSubmit(e) {
     e.preventDefault()
     console.log('Form sent', formData);
 
-    
+
     const newPost = {
       title: formData.title,
       author: formData.author,
       img: formData.img,
       description: formData.description,
-      
+
     };
 
 
@@ -71,7 +80,7 @@ function App() {
       .then(data => {
         console.log('Post added', data);
 
-        
+
 
         setFormData(initialFormdata);
         fetchData();
@@ -98,12 +107,10 @@ function App() {
       <AppHeader />
       <main>
 
-        <div className="p5 mb-4">
-          <div className="container-fluid py-5">
+        <div className="p5">
+          <div className="container-fluid bg-warning mb-2">
             <h1 className="display-5 fw-bold">Aggiungi il tuo post</h1>
-            <p className="col-md-8 fs-4">
-              questo post......
-            </p>
+        
             <button className="btn btn-primary btn-lg" type="button" popovertarget='off-canvas-form'>
               <i className="bi bi-plus"></i> Add
             </button>
@@ -120,6 +127,8 @@ function App() {
           </div>
 
           <form onSubmit={handleFormSubmit}>
+
+
             <div className="mb-3">
               <label htmlFor="title" className="form-label">name</label>
               <input type="text"
@@ -133,6 +142,21 @@ function App() {
                 onChange={handleFormField}
               />
             </div>
+
+            <div className="mb-3">
+              <label htmlFor="img" className="form-label">author</label>
+              <input type="text"
+                className="form-controll"
+                id="author"
+                name="author"
+                aria-describedby="imagehelper"
+                placeholder="add author"
+                required
+                value={formData.author}
+                onChange={handleFormField}
+              />
+            </div>
+
 
             <div className="mb-3">
               <label htmlFor="img" className="form-label">image</label>
@@ -236,41 +260,54 @@ function App() {
         </div>
 
 
-        <div className="container bg-warning p-1">
 
-          <div className="row justify-content-center">
-            <div className="col-sm-12 col-md-6 col-lg-4 g-3">
+        <div className="container p-2 bg-black">
+          <div className="row">
+            
               {task.data ? task.data.map((character, index) => (
 
-                <div className="card" key={character.id}>
 
-                  <img src={api_server + character.img} alt="" />
+
+
+
+                <div className="col-3" key={character.id}>
+                   <div className="card">
+                   <img src={api_server + character.img} alt="" />
                   <div className="card-body">
-                    <p>{character.title}</p>
-                    <p>{character.author}</p>
+                  
+                    <h3 className="card-title">{character.title}</h3>
+                    <p className="card-text">{character.author}</p>
 
-                    <p>{character.description}</p>
+                    <p className="card-text">{character.description}</p>
                     <button onClick={handlerDeleteTask} taskTrashIndex={index}> press</button>
                   </div>
 
-
+                   </div>
+                  
 
                 </div>
+
+
               )) : <p>no result</p>}
-
-            </div>
-
+            
           </div>
-
-
-
-
-
-
-
-
-
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       </main>
