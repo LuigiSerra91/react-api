@@ -40,7 +40,7 @@ function App() {
   useEffect(fetchData, [])
 
   function handlerDeleteTask(e) {
-
+    e.preventDefault()
     console.log(e.target.getAttribute('data-id'));
 
     const id = e.target.getAttribute('data-id')
@@ -268,7 +268,7 @@ function App() {
 
 
 
-        <div className="container p-2 bg-black">
+        <div className="container p-2 bg-black p-3">
           <div className="row">
 
             {task.data ? task.data.map((character) => (
@@ -277,7 +277,7 @@ function App() {
 
 
 
-              <div className="col-3" key={character.id}>
+              <div className="col-3 p-1" key={character.id}>
 
 
                 <div className="card">

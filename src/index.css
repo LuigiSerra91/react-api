@@ -6,6 +6,7 @@ img{
     img{
         width: 150px;
     }
+    
     background-color: bisque;
     p{
         font-family: fantasy;
@@ -15,6 +16,9 @@ img{
    display: flex;
    
    align-items: center;
+   
+   height: 100%;
+
    
 }
 
