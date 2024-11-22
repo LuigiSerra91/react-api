@@ -41,25 +41,25 @@ function App() {
 
   function handlerDeleteTask(e) {
 
- // select the task to remove
- console.log(e.target);
+    console.log(e.target.getAttribute('data-id'));
 
+    const id = e.target.getAttribute('data-id')
+    fetch('http://localhost:3002/post/' + id, {
+      method: 'DELETE',
+      headers: {
+        'content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+      .then(Response => {
+        console.log(Response);
+        setTask(Response.data)
 
- const taskIndexToTrash = Number(e.target.getAttribute('data-index'))
+      })
+  }
 
- // remove the task based on its index
- console.log(task, taskIndexToTrash);
- const newTasks = task.filter((task, index) => index != taskIndexToTrash)
-
- console.log(newTasks);
-
- setTask(newTasks)
-
-}
-
-function handleSearchForm(e) {
- e.preventDefault()
- //alert('Form sent')
+  function handleSearchForm(e) {
+    e.preventDefault()
+    //alert('Form sent')
   }
 
 
@@ -117,7 +117,7 @@ function handleSearchForm(e) {
         <div className="p5">
           <div className="container-fluid bg-warning mb-2">
             <h1 className="display-5 fw-bold">Aggiungi il tuo post</h1>
-        
+
             <button className="btn btn-primary btn-lg" type="button" popovertarget='off-canvas-form'>
               <i className="bi bi-plus"></i> Add
             </button>
@@ -270,33 +270,39 @@ function handleSearchForm(e) {
 
         <div className="container p-2 bg-black">
           <div className="row">
-            
-              {task.data ? task.data.map((character, index) => (
+
+            {task.data ? task.data.map((character) => (
 
 
 
 
 
-                <div className="col-3" key={character.id}>
-                   <div className="card">
-                   <img src={api_server + character.img} alt="" />
+              <div className="col-3" key={character.id}>
+
+
+                <div className="card">
+                  <img src={api_server + character.img} alt="" />
                   <div className="card-body">
-                  
+
                     <h3 className="card-title">{character.title}</h3>
                     <p className="card-text">{character.author}</p>
 
                     <p className="card-text">{character.description}</p>
-                    <button onClick={handlerDeleteTask} taskTrashIndex={index}> press</button>
-                  </div>
 
-                   </div>
-                  
+                    <form onSubmit={handlerDeleteTask} data-id={data.id}>
+                      <button className="btn btn-danger" type="submit"> press</button>
+                    </form>
+
+                  </div>
 
                 </div>
 
 
-              )) : <p>no result</p>}
-            
+              </div>
+
+
+            )) : <p>no result</p>}
+
           </div>
         </div>
 
