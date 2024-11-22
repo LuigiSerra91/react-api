@@ -11,6 +11,11 @@ img{
         font-family: fantasy;
         color: tomato;
     }
+
+   display: flex;
+   
+   align-items: center;
+   
 }
 
 

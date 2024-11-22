@@ -41,18 +41,25 @@ function App() {
 
   function handlerDeleteTask(e) {
 
+ // select the task to remove
+ console.log(e.target);
 
-    fetch('http://localhost:3002/post/${id}', {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
 
-      })
-    //const taskTrashIndex = Number(e.target.getAttribute('data-index'))
-    // const newTask = task.data.filter((task, index) => index !== taskTrashIndex)
+ const taskIndexToTrash = Number(e.target.getAttribute('data-index'))
 
-    //setTask(newTask)
+ // remove the task based on its index
+ console.log(task, taskIndexToTrash);
+ const newTasks = task.filter((task, index) => index != taskIndexToTrash)
+
+ console.log(newTasks);
+
+ setTask(newTasks)
+
+}
+
+function handleSearchForm(e) {
+ e.preventDefault()
+ //alert('Form sent')
   }
 
 
