@@ -50,10 +50,11 @@ function App() {
         'content-Type': 'application/json'
       }
     }).then(res => res.json())
-      .then(Response => {
-        console.log(Response);
-        setTask(Response.data)
-
+      .then(res => {
+        console.log(res);
+        setTask(task.filter((trash) => trash.id !== parseInt(id)));
+       
+        
       })
   }
 
@@ -277,7 +278,7 @@ function App() {
 
 
 
-              <div className="col-3 p-1" key={character.id}>
+              <div className="col-3 p-3" key={character.id}>
 
 
                 <div className="card">
@@ -289,7 +290,7 @@ function App() {
 
                     <p className="card-text">{character.description}</p>
 
-                    <form onSubmit={handlerDeleteTask} data-id={data.id}>
+                    <form onSubmit={handlerDeleteTask} data-id={character.id}>
                       <button className="btn btn-danger" type="submit"> press</button>
                     </form>
 
