@@ -1,91 +1,130 @@
 import { useEffect, useState } from "react";
-import data from '../data/post.js'
-export default function AppMain( ){
-    const [task, setTask] = useState(data)
-    const[newTask, setNewTask] = useState('')
-    const[searchText, setSearchText] = useState('')
-    const[filteredTasks, setFilteredTasks] = useState([])
-    useEffect(() => {
-        const filteredTasks = task.filter((task) => task.includes(searchText))
-       setFilteredTasks(filteredTasks)
-    },[task, searchText])
+import AddCanvas from "./AddCanvas";
+import AppCard from "./CardBlog";
 
-
-    function addTask(e) {
-        e.preventDefault()
-
-        setTask([
-            ...task,
-            newTask
-        ])
-
-        setNewTask('')
-    }
-   function handlerDeleteTask(e) {
-    const dataIndex = e.target.getAttribute('dataIndex')
-    const newTask = task.filter((task, index) => dataIndex != index ) 
-
-    setTask(newTask)
-   }
-
-   function handleSearchForm(e) {
-    e.preventDefault()
-    //alert('Form sent')
+const initialFormdata = {
+    title: '',
+    author: '',
+    img: '',
+    description: '',
+  
   }
+
+ 
+
+export default function AppMain() {
+
+    const [task, setTask] = useState([])
+    const [formData, setFormData] = useState(initialFormdata)
+  
+    function fetchData(url = "http://localhost:3002/post") {
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setTask(data)
+  
+  
+        })
+    }
+  
+    useEffect(fetchData, [])
+  
+    function handlerDeleteTask(e) {
+      e.preventDefault()
+      console.log(e.target.getAttribute('data-id'));
+  
+      const id = e.target.getAttribute('data-id')
+      fetch('http://localhost:3002/post/' + id, {
+        method: 'DELETE',
+        headers: {
+          'content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+        .then(res => {
+          console.log(res);
+          setTask(task.filter((trash) => trash.id !== parseInt(id)));
+         
+          
+        })
+    }
+  
+    function handleSearchForm(e) {
+      e.preventDefault()
+      //alert('Form sent')
+    }
+  
+  
+  
+    function handleFormSubmit(e) {
+      e.preventDefault()
+      console.log('Form sent', formData);
+  
+  
+      const newPost = {
+        title: formData.title,
+        author: formData.author,
+        img: formData.img,
+        description: formData.description,
+  
+      };
+  
+  
+      fetch('http://localhost:3002/post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newPost)
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log('Post added', data);
+  
+  
+  
+          setFormData(initialFormdata);
+          fetchData();
+        })
+        .catch(err => {
+          console.error('Error adding post', err);
+        })
+    }
+  
+  
+    function handleFormField(e) {
+      //console.log(e.target);
+  
+      const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+  
+      setFormData({
+        ...formData,
+        [e.target.name]: value
+      })
+    }
+  
+
 
 
     return (
         <>
-        
-        <main>
-            <div className="container bg-warning p-1">
-                <h1>Lista dei post</h1>
+         <AddCanvas handleFormSubmit={handleFormSubmit} handleFormField={handleFormField} formData={formData} />
+           
+        <div className="container p-2 bg-black p-3">
+          <div className="row">
 
-                <form onSubmit={addTask}>
-                <div className="mb-3">
-                     <label htmlFor="task" className='form-label'>Post</label>
-                      <div className="input-group mb-3">
-                      <input type="text" className='form-control' placeholder='Recipient'
-                      aria-label='Recipiement username'  aria-labelledby='button-addon2'
-                      value={newTask}
-                      onChange={e => setNewTask(e.target.value)}/>
-                    <button className='btn  bg-primary' type='submit' id='button-addon2'>Send</button>
+            {task.data ? task.data.map((character) => (
 
-            </div>
-                           <small id='taskHelperId' className='form-text text-muted'>type your new post</small>
-             </div>
 
-                </form>s
 
-                <form onSubmit={handleSearchForm}>
+             <AppCard  data={character} trashBtn={handlerDeleteTask} />
 
-                    <div className="mb-3">
-                        <input type="search"
-                         name="searchText"
-                          id="searchText"
-                          aria-describedby="searchText"
-                          placeholder="Search..."
-                          value={searchText}
-                          onChange={e => setSearchText(e.target.value)}
-                           />
-                    </div>
-                </form>
+             
 
-                
-                
-                   <ul className="list-group">
 
-                       {filteredTasks.map((task, index) =>  <li key={index} className="list-group-item d-flex justify-content-between">{task} <button onClick={handlerDeleteTask} dataIndex={index}>
-                       <i className="bi bi-trash"></i>
-                        </button></li> 
-                    
-                    )}
+            )) : <p>no result</p>}
 
-                   </ul>
-            </div>
-        </main>
-        
-        
+          </div>
+        </div>
+
         </>
     )
 }

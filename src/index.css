@@ -1,12 +1,16 @@
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 img{
     max-width: 100%;
 }
 
 .card{
-    img{
-        width: 150px;
-    }
-    
+
     background-color: bisque;
     p{
         font-family: fantasy;
@@ -26,5 +30,9 @@ img{
 
 main{
     background-color: black;
+}
+
+header{
+    margin-bottom: -8px;
 }
 
