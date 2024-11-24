@@ -85,7 +85,7 @@ export default function AddCanvas( {handleFormSubmit, handleFormField, formData}
               ></textarea>
             </div>
             <select
-              id="selectInput"
+              id="category"
               name="category"
               placeholder="Seleziona categoria post"
               value={formData.category}
