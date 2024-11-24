@@ -8,6 +8,7 @@ export default function AddCanvas( {handleFormSubmit, handleFormField, formData}
         <div className="add-post">
           <div className="container-fluid bg-warning mb-2">
             <h1 className="display-5 fw-bold pb-4">Aggiungi il tuo post</h1>
+            <h3>"Condividi la tua passione per gli anime aggiungendo un nuovo post sul nostro blog, dove potrai esplorare e discutere le ultime novità, recensioni e approfondimenti sul mondo degli anime!"</h3>
 
             <button className="btn btn-primary btn-lg" type="button" popovertarget='off-canvas-form'>
               <i className="bi bi-plus"></i> Add

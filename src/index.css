@@ -8,6 +8,9 @@
 img{
     max-width: 100%;
 }
+body{
+    background-color: black;
+}
 
 .card{
 
@@ -34,5 +37,6 @@ main{
 
 header{
     margin-bottom: -8px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
 }
-
