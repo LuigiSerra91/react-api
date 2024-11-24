@@ -270,7 +270,7 @@ function App() {
 
 
 
-                <div className="col-3" key={character.id}>
+                <div className="col-3 p-3" key={character.id}>
                    <div className="card">
                    <img src={api_server + character.img} alt="" />
                   <div className="card-body">
