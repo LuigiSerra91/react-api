@@ -1,4 +1,9 @@
 export default function AppCard({ character, handlerDeleteTask, }) {
+
+
+const api_server = "http://localhost:3002"
+
+
     return (
         <>
 
