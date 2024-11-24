@@ -7,6 +7,7 @@ const initialFormdata = {
   author: '',
   img: '',
   description: '',
+  category:''
 
 }
 
@@ -111,30 +112,10 @@ export default function AppMain() {
       <PostList>
         {task.data ? task.data.map(post => <div className="col-3 p-3" key={post.id}>
 
-
-
-          <div className="card">
-            <img src={api_server + post?.img} alt="img-anime" />
-            <div className="card-body">
-
-              <h3 className="card-title">{post?.title}</h3>
-              <p className="card-text">{post?.author}</p>
-
-              <p className="card-text">{post?.description}</p>
-
-              <form onSubmit={handlerDeleteTask} data-id={post?.id}>
-                <button className="btn btn-danger" type="submit">
-                  <i className="bi bi-trash"></i>
-                </button>
-              </form>
-
-            </div>
-
-          </div>
-
+          <AppCard key={post.id} handlerDeleteTask={handlerDeleteTask} post={post} />
 
         </div>) : <p>no result</p>}
-       
+
       </PostList>
 
 

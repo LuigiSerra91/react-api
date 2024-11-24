@@ -90,48 +90,24 @@ export default function AddCanvas( {handleFormSubmit, handleFormField, formData}
               placeholder="Seleziona categoria post"
               value={formData.category}
               onChange={handleFormField}>
-              <option value="1">
-                categoria 1
+              <option value="">
+                hobby
               </option>
-              <option value="2">
-                categoria 2
+              <option value="">
+                viaggi
               </option>
-              <option value="3">
-                categoria 3
+              <option value="">
+                cultura
               </option>
-              <option value="4">
-                categoria 4
+              <option value="">
+              sport
               </option>
-              <option value="5">
-                categoria 5
+              <option value="">
+                anime
               </option>
             </select>
 
-            {/* input checkbox tags */}
-            <input type="checkbox"
-              id="checkInput1"
-              name="tag1"
-              value={formData.tags}
-              onChange={handleFormField} />
-            <label>
-              Tag1
-            </label>
-            <input type="checkbox"
-              id="checkInput2"
-              name="tag2"
-              value={formData.tags}
-              onChange={handleFormField} />
-            <label>
-              Tag2
-            </label>
-            <input type="checkbox"
-              id="checkInput3"
-              name="tag3"
-              value={formData.tags}
-              onChange={handleFormField} />
-            <label>
-              Tag3
-            </label>
+            
             <div className="form-check mb-3">
               <input
                 id="available"
