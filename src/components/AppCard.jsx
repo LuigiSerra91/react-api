@@ -8,7 +8,7 @@ export default function AppCard({ post, handlerDeleteTask }) {
 
     return (
         <>
-            <div className="card">
+            <div className="card">FF
                 <img src={api_server + post?.img} alt="img-anime" />
                 <div className="card-body">
 
@@ -16,7 +16,7 @@ export default function AppCard({ post, handlerDeleteTask }) {
                     <p className="card-text">{post?.author}</p>
 
                     <p className="card-text">{post?.description}</p>
-                   <p>{post?.category}</p>
+                    <p>{post?.category}</p>
 
                     <form onSubmit={handlerDeleteTask} data-id={post?.id}>
                         <button className="btn btn-danger" type="submit">

@@ -1,42 +1,43 @@
-
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-img{
+img {
     max-width: 100%;
 }
-body{
+
+body {
     background-color: black;
 }
 
-.card{
+.card {
 
     background-color: bisque;
-    p{
+
+    p {
         font-family: fantasy;
         color: tomato;
     }
 
-   display: flex;
-   
-   align-items: center;
-   
-   height: 100%;
+    display: flex;
 
-   box-shadow: 10px 10px 10px  yellow;
+    align-items: center;
 
-   
+    height: 100%;
+
+    box-shadow: 10px 10px 10px yellow;
+
+
 }
 
-main{
+main {
     background-color: black;
 }
 
-header{
+header {
     margin-bottom: -8px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    
+
 }

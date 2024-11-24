@@ -4,8 +4,8 @@ export default function AppHeader() {
 
     return (
         <header>
-             {pageTitle}
+            {pageTitle}
         </header>
-       
+
     )
 }

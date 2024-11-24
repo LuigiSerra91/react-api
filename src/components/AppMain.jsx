@@ -7,7 +7,7 @@ const initialFormdata = {
   author: '',
   img: '',
   description: '',
-  category:''
+  category: ''
 
 }
 
